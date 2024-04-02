@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FCFS Result</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['gantt']});
+        google.charts.setOnLoadCallback(drawChart);
+
+        function drawChart() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Task ID');
+            data.addColumn('string', 'Task Name');
+            data.addColumn('date', 'Start Date');
+            data.addColumn('date', 'End Date');
+            data.addColumn('number', 'Duration');
+            data.addColumn('number', 'Percent Complete');
+            data.addColumn('string', 'Dependencies');
+
+            // Convert your gantt_chart_data to the Google Charts format
+            var gantt_chart_data = {{ gantt_chart_data | tojson | safe }};
+            var chartData = gantt_chart_data.map(function(item) {
+                return [
+                    `Process ${item.process_id}`,
+                    `Process ${item.process_id}`,
+                    new Date(item.start_time * 1000), // Assuming start_time is a Unix timestamp in seconds
+                    new Date(item.end_time * 1000),   // Adjust if your timing is in a different format
+                    null,
+                    100,
+                    null
+                ];
+            });
+
+            data.addRows(chartData);
+
+            var options = {
+                height: 400,
+                gantt: {
+                    trackHeight: 30
+                }
+            };
+
+            var chart = new google.visualization.Gantt(document.getElementById('ganttChart'));
+            chart.draw(data, options);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">FCFS Result</h1>
+        <!-- Existing HTML content for displaying process details -->
+        <div class="mt-5">
+            <h2>Gantt Chart</h2>
+            <div id="ganttChart"></div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
