@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gantt Chart</title>
+    <style>
+        /* Basic styling for the Gantt chart */
+        .gantt {
+            display: flex;
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            overflow-x: auto; /* Enable horizontal scrolling */
+        }
+        .task {
+            position: relative;
+            border-left: 1px solid #000;
+            flex-grow: 1;
+        }
+        .task span {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="gantt" id="ganttChart" style="border: 1px solid green; height: 30vh;"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tasks = [
+                { name: 'Task 1', start: '2024-04-01', end: '2024-04-05' },
+                { name: 'Task 2', start: '2024-04-03', end: '2024-04-08' },
+                { name: 'Task 3', start: '2024-04-06', end: '2024-04-12' }
+            ];
+
+            var ganttChart = document.getElementById('ganttChart');
+
+            tasks.forEach(function(task) {
+                var startDate = new Date(task.start);
+                var endDate = new Date(task.end);
+
+                var taskDiv = document.createElement('div');
+                taskDiv.className = 'task';
+                var width = (endDate - startDate) / (1000 * 60 * 60 * 24); // Number of days
+                taskDiv.style.width = width * 10 + '%'; // 20px per day
+                taskDiv.innerHTML = '<span>' + task.name + '</span>';
+
+                ganttChart.appendChild(taskDiv);
+            });
+        });
+    </script>
+</body>
+</html>

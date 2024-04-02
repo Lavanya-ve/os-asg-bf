@@ -9,16 +9,24 @@
 <body>
     <div class="container">
         <h1 class="mt-4">CPU Scheduling - FCFS</h1>
-        <form action="/" method="post" class="mt-4">
+        <!-- <form action="/" method="post" class="m</form>t-4">
             <div id="processesForm">
-                <!-- Dynamic processes input will be added here -->
             </div>
             <div class="form-group">
                 <label for="num_processes">Number of Processes</label>
                 <input type="number" class="form-control" id="num_processes" name="num_processes" placeholder="Enter number of processes" required>
             </div>
             <button type="button" id="generateForm" class="btn btn-primary">Generate Form</button>
-            <button type="submit" class="btn btn-success">Submit</button>
+            <button type="submit" class="btn btn-success" disabled>Submit</button>
+        </form> -->
+        <form action="/" method="post" class="mt-4">
+            <div class="input-group">
+                <input type="number" class="form-control" id="num_processes" name="num_processes" placeholder="Enter number Of processes" aria-label="Recipient's username with two button addons" required>
+                <button class="btn btn-outline-secondary" id="generateForm" type="button">Upload processes</button>
+                <button class="btn btn-outline-secondary" type="submit">Submit</button>
+            </div>
+            <div id="processesForm" class="mt-4">
+            </div>
         </form>
     </div>
 
